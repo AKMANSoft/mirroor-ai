@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base{
+    html, body {
+        background: white;
+    }
+}
+
+
+
+@layer components {
+    .btn-mic {
+        @apply w-20 relative h-auto rounded-full text-white bg-primary shadow-lg aspect-square shadow-primary hover:shadow-none transition-all duration-500;
+        /* box-shadow: 0 0 30px 10px rgba(30, 143, 255, 0.4); */
+    }
+
+    .ripple {
+        position: relative;
+    }
+
+    .ripple>.circle {
+        @apply rounded-full h-full w-full absolute opacity-0 bg-primary transition-all duration-500;
+        animation: growAndFade 3s infinite ease-out;
+    }
+
+    .ripple .circle:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .ripple .circle:nth-child(2) {
+        animation-delay: 1s;
+    }
+
+    .ripple .circle:nth-child(3) {
+        animation-delay: 2s;
+    }
+
+    .ripple .circle:nth-child(4) {
+        animation-delay: 3s;
+    }
+}
+
+@keyframes growAndFade {
+    0% {
+        opacity: 1;
+        transform: scale(.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
