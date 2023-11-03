@@ -1,3 +1,4 @@
+import { PaginatedAudioBlocks } from "@/types/api";
 import { ResetPasswordSchema, LoginSchema, RegisterSchema, CreateNewPasswordSchema } from "@/types/form.types";
 import { ApiResCode, CreateNewPasswordResponse, LoginResponse, ProcessAudioResponse, RegisterResponse, ResetPasswordResponse, UserProfile } from "@/types/response.types";
 import axios from "axios";
@@ -110,6 +111,28 @@ async function getProfile(): Promise<UserProfile | null> {
     return null
 }
 
+
+async function getUserData({ page = 1, perPage = 10, recentsOnly = false }): Promise<PaginatedAudioBlocks> {
+    try {
+        const res = await axios.get(
+            `/api/user/data?page=${page}&perPage=${perPage}&recentsOnly=${recentsOnly}`,
+            { withCredentials: true }
+        )
+        if (res.status !== 200 || !res.data.data) throw new Error();
+        return {
+            ...res.data,
+            data: res.data?.data?.map((a: any) => ({
+                ...a,
+                zshot: (a.zshot ? JSON.parse(a.zshot) : []),
+                createdAt: new Date(a.createdAt)
+            }))
+        }
+    } catch (error) {
+        console.error(error)
+    }
+    return { succeed: false, data: [] }
+}
+
 async function processAudio(audio: Blob): Promise<ProcessAudioResponse> {
     try {
         const data = new FormData();
@@ -135,7 +158,8 @@ const api = {
     getProfile,
     processAudio,
     resetPassword,
-    createNewPassword
+    createNewPassword,
+    getUserData
 }
 
 export default api;

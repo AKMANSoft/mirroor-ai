@@ -48,10 +48,11 @@ export default function App() {
   axios.defaults.withCredentials = true
 
 
-
   return (
     <I18nextProvider i18n={i18n}>
       <RouterProvider router={router} />
     </I18nextProvider>
   )
 }
+
+

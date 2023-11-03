@@ -1,3 +1,4 @@
+import AudiosGraph from "@/components/audios-graph";
 import EmailNotVerified from "@/components/email-not-verified";
 import Layout from "@/components/layout";
 import useRecorder from "@/components/use-recorder";
@@ -288,6 +289,8 @@ export default function HomePage() {
                   </div>
                 </section>
               }
+              <AudiosGraph />
+              {/* <AudiosTable /> */}
             </>
         )
       }

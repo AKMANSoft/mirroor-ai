@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
@@ -22,7 +21,6 @@ export function UserNavMenu({ user, logout }: { user: UserProfile, logout: () =>
     i18n.changeLanguage(lang)
   }
 
-  console.log(user)
 
   return (
     <DropdownMenu>
@@ -61,12 +59,12 @@ export function UserNavMenu({ user, logout }: { user: UserProfile, logout: () =>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <a href="/api/export-excel" className="flex w-full py-2 text-sm font-medium items-center">
-                Export to excel
+                {trans("export-excel")}
               </a>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <a href="/api/export-db" className="flex w-full py-2 text-sm font-medium items-center">
-                Export DB file
+                {trans("export-db")}
               </a>
             </DropdownMenuItem>
           </>
